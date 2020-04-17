@@ -28,5 +28,5 @@ router
   .route('/:shortURL')
   .get(dataController.setTemplateVars, urlController.getOne) // ^^ Returns info about url
   // .put(dataController.update) // ^^ Update a data entry
-  // .delete(dataController.delete) // ^^ Delete a data entry
+  .delete(dataController.deleteURL) // ^^ Delete a data entry
   
