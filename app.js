@@ -75,8 +75,8 @@ app.use((req, res, next) => {
 
   req.templateVars = {}
 
-  if (req.session.templateVars !== undefined) {
-    req.templateVars = req.session.templateVars;
+  if (req.session.user !== undefined) {
+    req.templateVars.user = req.session.user;
   } else {
     
     req.templateVars.user = null;

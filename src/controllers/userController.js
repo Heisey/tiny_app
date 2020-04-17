@@ -8,7 +8,13 @@ exports.findUser = (req, res, next) => {
 
   const { username, password } = req.body;
 
-  const user = userData.findUser(username, password);
+  console.log(user)
+
+  const user = userData.findUser(username);
+
+  if (!userData.checkPassword(user.id, password)) {
+    res.redirect('/login')
+  }
 
   if (user) {
     req.templateVars.user = user;
@@ -19,14 +25,14 @@ exports.findUser = (req, res, next) => {
 
 exports.login = (req, res, next) => {
 
-  req.session.templateVars = req.templateVars
+  req.session.user = req.templateVars
 
   res.status(200).redirect('../urls')
 }
 
 exports.logout = (req, res, next) => {
 
-  req.session.templateVars = undefined;
+  req.session.user = undefined;
   
   res.redirect('/urls')
 }
@@ -51,8 +57,9 @@ exports.signup = (req, res, next) => {
 
     return res.redirect('/user/signup')
   }
-
-  userData.createUser(username, email, password)
+  const user = userData.createUser(username, email, password)
+  
+  req.session.user = user;
 
   res.redirect('../urls')
 }

@@ -16,7 +16,7 @@ exports.getAll = (req, res, next) => {
 }
 
 exports.getUserURLS = (req, res, next) => {
-  console.log(req.templateVars.user)
+  
   if (req.templateVars.user === null) {
     req.templateVars.urls = null;
     return next()

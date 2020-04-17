@@ -1,5 +1,5 @@
 const generateRandomString = require('../utils/generateRandomString');
-
+const bcrypt = require('bcrypt');
 class USERDB {
   constructor() {
     this._users = {
@@ -14,17 +14,23 @@ class USERDB {
   createUser(username, email, password) {
     const id = generateRandomString();
 
+    // ** Encrypt password
+  const encryptPassword = bcrypt.hashSync(password, 12);
+
     this._users[id] = {
       username,
       email,
-      password
+      password: encryptPassword
     }
+
+    return this._users[id]
   }
 
-  findUser(username, password) {
+  findUser(username) {
     for (let user in this._users) {
-      if (this._users[user].username === username && this._users[user].password === password) {
-        return this._users[user]
+      if (this._users[user].username === username) {
+
+        return { user: this._users[user] }
       }
     }
   }
@@ -47,6 +53,14 @@ class USERDB {
     }
 
     return false
+  }
+
+  checkPassword(id, password) {
+    if(bcrypt.compareSync(password, this._users[id].password)) {
+      return true
+    }
+
+    return false;
   }
 }
 
