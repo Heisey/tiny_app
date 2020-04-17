@@ -73,6 +73,7 @@ app.use((req, res, next) => {
   req.requestTime = requrestTime.toISOString;
   req.appName = 'TINY APP'
 
+  req.templateVars = {}
 
   if (req.session.templateVars !== undefined) {
     req.templateVars = req.session.templateVars;
