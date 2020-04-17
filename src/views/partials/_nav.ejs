@@ -10,7 +10,34 @@
       <a class="nav-item nav-link" href="/urls/new">Create New URL</a>
     </div>
 
- 
+    <% if (user) { %>
+      <div class="navTop ml-auto d-flex">
+        <div>
+          <form class="ml-3" method="POST" action="/user/logout">
+            <button type="submit" class="btn btn-danger">Logout</button>
+          </form>
+        </div>
+      </div>
+      <% } else { %>
+      <div class="ml-auto navTop">
+        <button 
+            class="btn btn-primary" 
+            type="button"
+            data-toggle="modal"
+            data-target="#signInModal"
+        >
+          Sign In
+        </button>
+        <button>
+          <a href="/user/signup">
+            Sign Up
+          </a>
+        </button>
+      </div>
+    <% } %>
+    
   </div>
 </nav>
 
+
+<%- include('sign_in_modal') -%>

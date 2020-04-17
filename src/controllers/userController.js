@@ -13,19 +13,25 @@ exports.findUser = (req, res, next) => {
     req.templateVars.user = user
   }
 
-  
-  
   next();
 }
 
 exports.login = (req, res, next) => {
 
   req.session.templateVars = req.templateVars
-  
+
   res.status(200).redirect('../urls')
+}
+
+exports.logout = (req, res, next) => {
+
+  req.session.templateVars = undefined;
+  
+  res.redirect('/urls')
 }
 
 exports.create = (req, res, next) => {
 
-  res.send('hello')
+
+  res.redirect('/urls')
 }
