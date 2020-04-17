@@ -27,7 +27,7 @@ router
 
 router
   .route('/:shortURL')
-  .get(viewController.getOne) // ^^ Returns info about url
+  .get(urlController.getURL, viewController.getOne) // ^^ Returns info about url
   .put(urlController.updateURL) // ^^ Update a data entry
   .delete(urlController.deleteURL) // ^^ Delete a data entry
   

@@ -77,6 +77,7 @@ app.use((req, res, next) => {
 
   if (req.session.user !== undefined) {
     req.templateVars.user = req.session.user;
+    req.templateVars.tile = req.session.title;
   } else {
     
     req.templateVars.user = null;

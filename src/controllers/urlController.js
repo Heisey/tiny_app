@@ -6,6 +6,8 @@
 // ?? Data
 const URLDB = require('../data/urlData');
 
+const generateRandomString = require('../utils/generateRandomString')
+
 const URLDATA = new URLDB();
 
 exports.getAll = (req, res, next) => {
@@ -26,6 +28,15 @@ exports.getUserURLS = (req, res, next) => {
   next()
 }
 
+exports.getURL = (req, res, next) => {
+
+  req.templateVars.shortURL = req.params.shortURL;
+  req.templateVars.longURL = URLDATA.getURL(req.templateVars.shortURL).longURL
+
+  next()
+
+}
+
 exports.createURL = (req, res, next) => {
 
   // ~~ Grab sent data
@@ -36,7 +47,7 @@ exports.createURL = (req, res, next) => {
   const shortURL = generateRandomString();
 
   // ## Create entry in DB
-  urlDB.createURL(shortURL, longURL);
+  URLDATA.createURL(shortURL, longURL, username);
 
   res.status(201).redirect(`/urls/${shortURL}`)
 }
@@ -47,7 +58,7 @@ exports.updateURL = (req, res, next) => {
 const { shortURL } = req.params;
 
 // ## update database
-urlDB.updateURL(shortURL, req.body[shortURL])
+URLDATA.updateURL(shortURL, req.body[shortURL])
 
 // ^^ 204 response to main info page
 res.status(204).redirect('/urls');

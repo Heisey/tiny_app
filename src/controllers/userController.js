@@ -8,9 +8,10 @@ exports.findUser = (req, res, next) => {
 
   const { username, password } = req.body;
 
-  console.log(user)
+  const user = userData.findUser(username).user;
 
-  const user = userData.findUser(username);
+  console.log(req.body)
+  console.log(user.id)
 
   if (!userData.checkPassword(user.id, password)) {
     res.redirect('/login')

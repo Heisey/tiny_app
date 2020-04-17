@@ -10,7 +10,14 @@
       <a class="nav-item nav-link" href="/urls/new">Create New URL</a>
     </div>
 
+    
+
     <% if (user) { %>
+      <div>
+        <p>
+          Welcome <span><%= user.username %>: </span> <%= user.email %>
+        </p>
+      </div>
       <div class="navTop ml-auto d-flex">
         <div>
           <form class="ml-3" method="POST" action="/user/logout">
@@ -18,6 +25,7 @@
           </form>
         </div>
       </div>
+      
       <% } else { %>
       <div class="ml-auto navTop">
         <button 

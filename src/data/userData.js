@@ -17,13 +17,15 @@ class USERDB {
     // ** Encrypt password
   const encryptPassword = bcrypt.hashSync(password, 12);
 
-    this._users[id] = {
+    const user = {
       username,
       email,
-      password: encryptPassword
+      password: encryptPassword,
+      id
     }
+    this._users[id] = user
 
-    return this._users[id]
+    return user
   }
 
   findUser(username) {
@@ -56,6 +58,7 @@ class USERDB {
   }
 
   checkPassword(id, password) {
+    console.log(id)
     if(bcrypt.compareSync(password, this._users[id].password)) {
       return true
     }

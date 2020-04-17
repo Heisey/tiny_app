@@ -49,7 +49,10 @@ class URLDB {
   }
 
   updateURL(id, data) {
-    this._url[id] = data;
+    console.log(data)
+    console.log(this._urls[id])
+    this._urls[id].longURL = data;
+    console.log(this._urls[id])
   }
 
   deleteURL(id) {
