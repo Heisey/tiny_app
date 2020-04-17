@@ -30,6 +30,18 @@ exports.createURL = (req, res, next) => {
     res.status(201).redirect(`/urls/${shortURL}`)
 }
 
+exports.updateURL = (req, res, next) => {
+
+  // ~~ Get params
+  const { shortURL } = req.params;
+
+  // ## update database
+  urlData[shortURL] = req.body[shortURL];
+
+  // ^^ 204 response to main info page
+  res.status(204).redirect('/urls');
+}
+
 exports.deleteURL = (req, res, next) => {
 
   // ~~ Grab key from params
