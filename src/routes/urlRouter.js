@@ -22,11 +22,11 @@ router
 router
   .route('/new')
   .get(urlController.getForm) // ^^ URL submission form
-  .post(dataController.createURL) // ^^ submit URL data
+  .post(urlController.createURL) // ^^ submit URL data
 
 router
   .route('/:shortURL')
   .get(dataController.setTemplateVars, urlController.getOne) // ^^ Returns info about url
-  .put(dataController.updateURL) // ^^ Update a data entry
-  .delete(dataController.deleteURL) // ^^ Delete a data entry
+  .put(urlController.updateURL) // ^^ Update a data entry
+  .delete(urlController.deleteURL) // ^^ Delete a data entry
   
