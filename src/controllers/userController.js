@@ -1,67 +1,90 @@
+// ????????????????????????????????????????????????????????????????
+// ?????????????????????? USER Controller ?????????????????????????
+// ????????????????????????????????????????????????????????????????
+
+// ???????????????????????? File Modules ??????????????????????????
+// ?? Data
 const USERDB = require('../data/userData')
 
+// ## Start DB
 const userData = new USERDB();
 
-
-
+// ~~ Get User Data
 exports.findUser = (req, res, next) => {
 
+  // ~~ Grab sent data
   const { username, password } = req.body;
 
+  // ## Query DB by username
   const user = userData.findUser(username).user;
 
-  console.log(req.body)
-  console.log(user.id)
-
+  // ** Check Password
   if (!userData.checkPassword(user.id, password)) {
-    res.redirect('/login')
+
+    // ^^ 401 Redirect
+    res.status(401).redirect('/login');
   }
 
+  // ~~ set req.template vars if user
   if (user) {
     req.templateVars.user = user;
   }
 
   next();
-}
+};
 
+// ~~ Login User
 exports.login = (req, res, next) => {
 
-  req.session.user = req.templateVars
+  // ~~ Get user data from cookie
+  req.session.user = req.templateVars;
 
-  res.status(200).redirect('../urls')
-}
+  // ^^ Redirect to main URLS
+  res.status(200).redirect('../urls');
+};
 
+// ~~ Logout User
 exports.logout = (req, res, next) => {
 
+  // ~~ Set cookie to undefined
   req.session.user = undefined;
-  
-  res.redirect('/urls')
-}
 
-exports.create = (req, res, next) => {
+  // ^^ 200 Redirect to main URLS
+  res.status(200).redirect('/urls');
+};
 
-  res.redirect('/urls')
-}
-
+// ~~ Signup new User
 exports.signup = (req, res, next) => {
 
+  // ~~ Get send data
   const { email, username, password } = req.body;
 
+  // !! Check if username exists
   if (userData.findUserName(username)) {
-    
+
+    // ~~ Set tempate title
     req.templateVars.title = 'Sorry that Username is taken';
 
+    // ^^ Redirect to user signup
     return res.redirect('/user/signup');
-  } else if (userData.findEmail(email) ) {
-    
-    req.templateVars.title = "Sorry that email is taken"
 
-    return res.redirect('/user/signup')
+    // !! Check if email exists
+  } else if (userData.findEmail(email)) {
+
+    // ~~ Set template title 
+    req.templateVars.title = "Sorry that email is taken";
+
+    // ^^ Redirect to user signup
+    return res.redirect('/user/signup');
   }
-  const user = userData.createUser(username, email, password)
-  
+
+  // ## Create new user in DB
+  const user = userData.createUser(username, email, password);
+
+  // ~~ Attatch user to cookie
   req.session.user = user;
 
-  res.redirect('../urls')
-}
+  // ^^ Redirect to main url
+  res.redirect('../urls');
+};
 

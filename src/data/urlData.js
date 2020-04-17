@@ -14,16 +14,27 @@ class URLDB {
     };
   }
 
+  /**
+   * Return all URL Data
+   */
   getAll() {
     return this._urls;
   }
 
+  /**
+   * Return URL Data
+   * @param {string} shortURL - URL ID
+   */
   getURL(id) {
     return this._urls[id];
   }
 
+  /**
+   * Return User URL Data
+   * @param {string} shortURL - User ID
+   */
   getUserURLS(username) {
-    const urls = {}
+    const urls = {};
 
     for (let url in this._urls) {
       if (this._urls[url].username === username) {
@@ -31,32 +42,40 @@ class URLDB {
       }
     }
 
-    return urls
+    return urls;
   }
 
   /**
-   * Add a description
-   * @param {string} shortURL - Add a comment.
-   * @param {string} longURL - Add a comment.
+   * Create new URL
+   * @param {string} shortURL - URL ID
+   * @param {string} longURL - URL Address
+   * @param {string} username - Username
    */
   createURL(shortURL, longURL, username) {
     const url = {
       shortURL,
       longURL,
       username
-    }
+    };
+
     this._urls[shortURL] = url;
   }
 
+  /**
+   * Update URL
+   * @param {string} id - URL ID
+   * @param {string} data - updated URL address
+   */
   updateURL(id, data) {
-    console.log(data)
-    console.log(this._urls[id])
     this._urls[id].longURL = data;
-    console.log(this._urls[id])
   }
 
+  /**
+   * Delete URL
+   * @param {string} id - URL ID
+   */
   deleteURL(id) {
-    delete this._urls[id]
+    delete this._urls[id];
   }
   
 }

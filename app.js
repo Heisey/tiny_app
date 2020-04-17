@@ -4,8 +4,8 @@
 
 // ?? A url shortener web app
 // ?? 
-// ?? Created on April 13, 2020
-// ?? Published on .....
+// ?? Created on April 16, 2020
+// ?? Published on April 16, 2020
 // ??
 // ?? run npm start to run server
 // ?? uses nodemon as a dev dependency
@@ -71,15 +71,21 @@ app.use((req, res, next) => {
 
   // ~~ Set Date and app name to req obj
   req.requestTime = requrestTime.toISOString;
-  req.appName = 'TINY APP'
 
-  req.templateVars = {}
+  // ~~ Set App name for logging
+  req.appName = 'TINY APP';
 
+  // ~~ Start template varialbes
+  req.templateVars = {};
+
+  // ~~ Check for user
   if (req.session.user !== undefined) {
+    // ~~ Set template variables
     req.templateVars.user = req.session.user;
     req.templateVars.tile = req.session.title;
   } else {
     
+    // ~~ Set template varialbes to null
     req.templateVars.user = null;
   }
 

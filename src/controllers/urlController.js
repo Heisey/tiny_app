@@ -6,42 +6,59 @@
 // ?? Data
 const URLDB = require('../data/urlData');
 
-const generateRandomString = require('../utils/generateRandomString')
+// ?? Utilities
+const generateRandomString = require('../utils/generateRandomString');
 
+// ## Start DB
 const URLDATA = new URLDB();
 
+// ~~ Get all URL Data
 exports.getAll = (req, res, next) => {
 
-  req.templateVars.urls = URLDATA.getAll()
+  // ## Query DB for all url data
+  req.templateVars.urls = URLDATA.getAll();
   
-  next()
-}
+  next();
+};
 
+// ~~ Get user URL data
 exports.getUserURLS = (req, res, next) => {
   
+  // !! Check for user
   if (req.templateVars.user === null) {
+
+    // ~~ set url data to null
     req.templateVars.urls = null;
-    return next()
+
+    return next();
   }
   
-  req.templateVars.urls = URLDATA.getUserURLS(req.templateVars.user.username)
-  next()
-}
+  // ## Query DB for user data
+  req.templateVars.urls = URLDATA.getUserURLS(req.templateVars.user.username);
+  
+  next();
+};
 
+// ~~ Get Single URL data
 exports.getURL = (req, res, next) => {
 
+  // ~~ set short URL value
   req.templateVars.shortURL = req.params.shortURL;
-  req.templateVars.longURL = URLDATA.getURL(req.templateVars.shortURL).longURL
 
-  next()
+  // ## Query DB for long URL value
+  req.templateVars.longURL = URLDATA.getURL(req.templateVars.shortURL).longURL;
 
-}
+  next();
+};
 
+// ~~ Create new URL
 exports.createURL = (req, res, next) => {
 
   // ~~ Grab sent data
   const { longURL } = req.body;
-  const { username } = req.templateVars.user
+
+  // ~~ Get User data
+  const { username } = req.templateVars.user;
 
   // ~~ Generate a unique id
   const shortURL = generateRandomString();
@@ -49,21 +66,24 @@ exports.createURL = (req, res, next) => {
   // ## Create entry in DB
   URLDATA.createURL(shortURL, longURL, username);
 
-  res.status(201).redirect(`/urls/${shortURL}`)
-}
+  // ^^ 201 redirect to single url page
+  res.status(201).redirect(`/urls/${shortURL}`);
+};
 
+// ~~ Update URL
 exports.updateURL = (req, res, next) => {
 
 // ~~ Get params
 const { shortURL } = req.params;
 
 // ## update database
-URLDATA.updateURL(shortURL, req.body[shortURL])
+URLDATA.updateURL(shortURL, req.body[shortURL]);
 
-// ^^ 204 response to main info page
+// ^^ 204 response to main URLS page
 res.status(204).redirect('/urls');
-}
+};
 
+// ~~ Delete URL
 exports.deleteURL = (req, res, next) => {
 
 // ~~ Grab key from params
@@ -74,10 +94,4 @@ urlDB.deleteURL(shortURL);
 
 // ^^ 204 response to main info page
 res.status(204).redirect('/urls');
-}
-
-exports.signup = (req, res, next) => {
-
-  // res.render('signUpUser');
-  res.send('hello')
-}
+};
