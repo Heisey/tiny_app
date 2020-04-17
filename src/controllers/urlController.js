@@ -15,10 +15,22 @@ exports.getAll = (req, res, next) => {
   next()
 }
 
+exports.getUserURLS = (req, res, next) => {
+  console.log(req.templateVars.user)
+  if (req.templateVars.user === null) {
+    req.templateVars.urls = null;
+    return next()
+  }
+  
+  req.templateVars.urls = URLDATA.getUserURLS(req.templateVars.user.username)
+  next()
+}
+
 exports.createURL = (req, res, next) => {
 
   // ~~ Grab sent data
   const { longURL } = req.body;
+  const { username } = req.templateVars.user
 
   // ~~ Generate a unique id
   const shortURL = generateRandomString();

@@ -7,7 +7,8 @@ exports.showAll = (req, res, next) => {
 }
 
 exports.getURLForm = (req, res, next) => {
-  res.status(200).render('newURL')
+  const templateVars = req.templateVars;
+  res.status(200).render('newURL', templateVars)
 }
 
 exports.getOne = (req, res, next) => {
