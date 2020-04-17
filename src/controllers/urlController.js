@@ -4,13 +4,16 @@
 
 // ???????????????????????? File Modules ??????????????????????????
 // ?? Data
-const urlData = require('../data/userData')
+const URLDB = require('../data/urlData');
 
+const URLDATA = new URLDB();
 
 exports.getAll = (req, res, next) => {
-  const templateVars = req.templateVars
+  const templateVars = req.templateVars;
 
-  res.status(200).render('index', templateVars)
+  templateVars.urls = URLDATA.getAll()
+
+  res.status(200).render('index', templateVars);
 }
 
 exports.getForm = (req, res, next) => {
@@ -24,4 +27,42 @@ exports.getOne = (req, res, next) => {
   templateVars.longURL = urlData[templateVars.shortURL]
 
   res.status(200).render('singleURL.ejs', templateVars)
+}
+
+exports.createURL = (req, res, next) => {
+
+  // ~~ Grab sent data
+  const { longURL } = req.body;
+
+  // ~~ Generate a unique id
+  const shortURL = generateRandomString();
+
+  // ## Create entry in DB
+  urlDB.createURL(shortURL, longURL);
+
+  res.status(201).redirect(`/urls/${shortURL}`)
+}
+
+exports.updateURL = (req, res, next) => {
+
+// ~~ Get params
+const { shortURL } = req.params;
+
+// ## update database
+urlDB.updateURL(shortURL, req.body[shortURL])
+
+// ^^ 204 response to main info page
+res.status(204).redirect('/urls');
+}
+
+exports.deleteURL = (req, res, next) => {
+
+// ~~ Grab key from params
+const { shortURL } = req.params;
+
+// ## Delete Entry in DB using key
+urlDB.deleteURL(shortURL);
+
+// ^^ 204 response to main info page
+res.status(204).redirect('/urls');
 }
