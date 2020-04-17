@@ -16,7 +16,6 @@ exports.setTemplateVars = (req, res, next) => {
 }
 
 exports.createURL = (req, res, next) => {
-    const templateVars = req.templateVars;
 
     // ~~ Grab sent data
     const { longURL } = req.body;
@@ -28,5 +27,5 @@ exports.createURL = (req, res, next) => {
     // ## Create entry in DB
     urlData[shortURL] = longURL;
 
-    res.redirect('/urls')
+    res.status(201).redirect(`/urls/${shortURL}`)
 }

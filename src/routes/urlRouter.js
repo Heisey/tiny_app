@@ -17,16 +17,16 @@ module.exports = router;
 
 router
   .route('/')
-  .get(dataController.setTemplateVars, urlController.main) // ^^ Main Route
+  .get(dataController.setTemplateVars, urlController.getAll) // ^^ Main Route
 
 router
   .route('/new')
   .get(urlController.getForm) // ^^ URL submission form
-  .post(dataController.setTemplateVars, dataController.createURL) // ^^ submit URL data
+  .post(dataController.createURL) // ^^ submit URL data
 
 router
   .route('/:shortURL')
-  // .get(viewController.shortURL) // ^^ Returns info about url
+  .get(dataController.setTemplateVars, urlController.getOne) // ^^ Returns info about url
   // .put(dataController.update) // ^^ Update a data entry
   // .delete(dataController.delete) // ^^ Delete a data entry
   
