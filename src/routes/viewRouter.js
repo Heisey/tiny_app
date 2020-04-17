@@ -5,8 +5,8 @@
 
 // ???????????????????????? File Modules ??????????????????????????
 // ?? Controllers
-const dataController = require('../controllers/dataController');
 const urlController = require('../controllers/urlController');
+const viewController = require('../controllers/viewController');
 
 // ??????????????????????? Vendor Modules ?????????????????????????
 const express = require('express');
@@ -17,16 +17,16 @@ module.exports = router;
 
 router
   .route('/')
-  .get(dataController.setTemplateVars, urlController.getAll) // ^^ Main Route
+  .get(urlController.getAll, viewController.showAll) // ^^ Main Route
 
 router
   .route('/new')
-  .get(urlController.getForm) // ^^ URL submission form
+  .get(viewController.getURLForm) // ^^ URL submission form
   .post(urlController.createURL) // ^^ submit URL data
 
 router
   .route('/:shortURL')
-  .get(dataController.setTemplateVars, urlController.getOne) // ^^ Returns info about url
+  .get(viewController.getOne) // ^^ Returns info about url
   .put(urlController.updateURL) // ^^ Update a data entry
   .delete(urlController.deleteURL) // ^^ Delete a data entry
   

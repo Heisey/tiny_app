@@ -28,6 +28,26 @@ class USERDB {
       }
     }
   }
+
+  findUserName(username) {
+    for (let user in this._users) {
+      if (this._users[user].username === username) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  findEmail(email) {
+    for (let user in this._users) {
+      if (this._users[user].email === email) {
+        return true
+      }
+    }
+
+    return false
+  }
 }
 
 module.exports = USERDB;

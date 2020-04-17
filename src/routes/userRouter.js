@@ -6,7 +6,7 @@
 // ?? Controllers
 const userController = require('../controllers/userController');
 const dataController = require('../controllers/dataController')
-// const viewController = require('../controllers/viewController');
+const viewController = require('../controllers/viewController');
 
 // ??????????????????????? Vendor Modules ?????????????????????????
 const express = require('express');
@@ -25,5 +25,5 @@ router
 
 router
   .route('/signup')
-  // .get(viewController.signup)
-  // .post(userController.signup)
+  .get(viewController.getUserForm)
+  .post(userController.signup)
