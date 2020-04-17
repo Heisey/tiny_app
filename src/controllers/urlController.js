@@ -9,24 +9,10 @@ const URLDB = require('../data/urlData');
 const URLDATA = new URLDB();
 
 exports.getAll = (req, res, next) => {
-  const templateVars = req.templateVars;
 
-  templateVars.urls = URLDATA.getAll()
-
-  res.status(200).render('index', templateVars);
-}
-
-exports.getForm = (req, res, next) => {
-  res.status(200).render('newURL')
-}
-
-exports.getOne = (req, res, next) => {
-  const templateVars = req.templateVars;
-
-  templateVars.shortURL = req.params.shortURL;
-  templateVars.longURL = urlData[templateVars.shortURL]
-
-  res.status(200).render('singleURL.ejs', templateVars)
+  req.templateVars.urls = URLDATA.getAll()
+  
+  next()
 }
 
 exports.createURL = (req, res, next) => {
@@ -65,4 +51,10 @@ urlDB.deleteURL(shortURL);
 
 // ^^ 204 response to main info page
 res.status(204).redirect('/urls');
+}
+
+exports.signup = (req, res, next) => {
+
+  // res.render('signUpUser');
+  res.send('hello')
 }
