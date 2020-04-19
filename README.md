@@ -1,4 +1,5 @@
 # TinyApp Project
+#### Built by Heisey
 TinyApp is a full stack web application built with Node and Express that allows users to shorten long URLs and share them with others.
 ## Final Product
 !["screenshot description"](https://github.com/Heisey/tiny_app/blob/master/docs/Screen%20Shot%202020-04-19%20at%203.45.55%20PM.png)
@@ -18,4 +19,4 @@ TinyApp is a full stack web application built with Node and Express that allows 
 - randomstring
 ## Getting Started
 - Install all dependencies (using the `npm install` command).
-- Run the development web server using the `node express_server.js` command.
+- Run the app using npm start
