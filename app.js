@@ -73,15 +73,15 @@ app.use(cookieSession({
 app.use((req, res, next) => {
 
   // ~~ Get Date
-  let requrestTime = new Date();
+  let requestTime = new Date();
 
   // ~~ Set Date and app name to req obj
-  req.requestTime = requrestTime.toISOString;
+  req.requestTime = requestTime.toISOString;
 
   // ~~ Set App name for logging
   req.appName = 'TINY APP';
 
-  // ~~ Start template varialbes
+  // ~~ Start template variables
   req.templateVars = {};
 
   // ~~ Check for user
@@ -91,12 +91,12 @@ app.use((req, res, next) => {
     req.templateVars.tile = req.session.title;
   } else {
     
-    // ~~ Set template varialbes to null
+    // ~~ Set template variables to null
     req.templateVars.user = null;
   }
 
   // ~~ Log Data to console
-  console.log(chalk.magenta.bold.inverse(`Request Time: ${requrestTime}`));
+  console.log(chalk.magenta.bold.inverse(`Request Time: ${requestTime}`));
 
   next();
 })

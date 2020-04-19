@@ -16,13 +16,16 @@ exports.findUser = (req, res, next) => {
   const { username, password } = req.body;
 
   // ## Query DB by username
-  const user = userData.findUser(username).user;
+  let user;
+  if(userData.findUser(username)) {
+    user = userData.findUser(username);
+  }
 
   // ** Check Password
-  if (!userData.checkPassword(user.id, password)) {
+  if (!user || !userData.checkPassword(user.id, password)) {
 
     // ^^ 401 Redirect
-    res.status(401).redirect('/login');
+    return res.status(401).redirect('/user/signup');
   }
 
   // ~~ set req.template vars if user
@@ -35,9 +38,9 @@ exports.findUser = (req, res, next) => {
 
 // ~~ Login User
 exports.login = (req, res, next) => {
-
+  
   // ~~ Get user data from cookie
-  req.session.user = req.templateVars;
+  req.session.user = req.templateVars.user;
 
   // ^^ Redirect to main URLS
   res.status(200).redirect('../urls');
@@ -50,7 +53,7 @@ exports.logout = (req, res, next) => {
   req.session.user = undefined;
 
   // ^^ 200 Redirect to main URLS
-  res.status(200).redirect('/urls');
+  res.status(200).redirect('/');
 };
 
 // ~~ Signup new User
@@ -62,9 +65,9 @@ exports.signup = (req, res, next) => {
   // !! Check if username exists
   if (userData.findUserName(username)) {
 
-    // ~~ Set tempate title
-    req.templateVars.title = 'Sorry that Username is taken';
-
+    // ~~ Set template title
+    req.session.title = 'Sorry that Username is taken';
+    
     // ^^ Redirect to user signup
     return res.redirect('/user/signup');
 
@@ -81,7 +84,7 @@ exports.signup = (req, res, next) => {
   // ## Create new user in DB
   const user = userData.createUser(username, email, password);
 
-  // ~~ Attatch user to cookie
+  // ~~ Attach user to cookie
   req.session.user = user;
 
   // ^^ Redirect to main url

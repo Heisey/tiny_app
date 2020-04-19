@@ -37,11 +37,13 @@ exports.getUserForm = (req, res, next) => {
 
   // ~~ Get Template Variable from req
   const templateVars = req.templateVars;
-
+  
   // ~~ Check for title if not set to null
   if (templateVars.title = undefined) {
     templateVars.title = null;
   }
+
+  console.log(templateVars)
 
   // ~~ set title from cookies
   templateVars.title = req.session.title;

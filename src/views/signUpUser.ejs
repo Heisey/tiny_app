@@ -1,7 +1,7 @@
 <%- include('partials/_header'); -%>
 
   <main class="container mx-auto">
-    <h2 class="mx-auto"><%= title %></h2>
+    <h2 class="text-center"><%= title %></h2>
     <form data-toggle="validator" role="form" class="w-50 mx-auto" method="POST" action="/user/signup">
       <div class="form-group">
         <label for="usernameInput">Enter a Username</label>
@@ -33,7 +33,7 @@
             name="password"
         />
       </div>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
+      <button type="submit" class="btn-login btn-custom-dark">Sign Up</button>
     </form>
   </main>
 

@@ -1,4 +1,4 @@
-<nav id="mainNav" class="navbar navbar-expand-md navbar-dark container mx-auto">
+<nav id="mainNav" class="navbar padding-large navbar-expand-md navbar-light container mx-auto">
   <a class="navbar-brand" href="/urls">TinyApp</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,15 +13,15 @@
     
 
     <% if (user) { %>
-      <div>
-        <p>
+      <div class="mx-auto user-welcome">
+        <h4>
           Welcome <span><%= user.username %>: </span> <%= user.email %>
-        </p>
+        </h4>
       </div>
       <div class="navTop ml-auto d-flex">
         <div>
           <form class="ml-3" method="POST" action="/user/logout">
-            <button type="submit" class="btn btn-danger">Logout</button>
+            <button type="submit" class="btn-logout btn-custom-dark">Logout</button>
           </form>
         </div>
       </div>
@@ -29,17 +29,19 @@
       <% } else { %>
       <div class="ml-auto navTop">
         <button 
-            class="btn btn-primary" 
+            class="btn-login btn-custom-dark" 
             type="button"
             data-toggle="modal"
             data-target="#signInModal"
         >
           Sign In
         </button>
-        <button>
-          <a href="/user/signup">
+        
+        <a href="/user/signup">
+          <button class="btn-signup btn-custom-light mx-3">
             Sign Up
-          </a>
+          </button>
+        </a>
         </button>
       </div>
     <% } %>

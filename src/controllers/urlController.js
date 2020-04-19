@@ -90,7 +90,7 @@ exports.deleteURL = (req, res, next) => {
 const { shortURL } = req.params;
 
 // ## Delete Entry in DB using key
-urlDB.deleteURL(shortURL);
+URLDATA.deleteURL(shortURL);
 
 // ^^ 204 response to main info page
 res.status(204).redirect('/urls');

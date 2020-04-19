@@ -17,9 +17,8 @@
     "express": "^4.17.1",
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.3",
     "randomstring": "^1.1.5"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.3"
-  }
+  "devDependencies": {}
 }
