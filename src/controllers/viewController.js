@@ -52,3 +52,16 @@ exports.getUserForm = (req, res, next) => {
   // ^^ 200 Render signUpUser
   res.status(200).render('signUpUser', templateVars);
 }
+
+// ~~ Render Welcome Page
+exports.getWelcome = (req, res, next) => {
+  const templateVars = req.templateVars;
+
+  res.render('welcome', templateVars)
+}
+
+exports.getSorry = (req, res, next) => {
+  const templateVars = req.templateVars
+
+  res.render('sorry', templateVars)
+}
