@@ -10,6 +10,9 @@ const URLDB = require('../data/urlData');
 const checkHttp = require('../utils/checkHttp');
 const generateRandomString = require('../utils/generateRandomString');
 
+const axios = require('axios');
+const chalk = require('chalk');
+
 // ## Start DB
 const URLDATA = new URLDB();
 
@@ -51,6 +54,21 @@ exports.getURL = (req, res, next) => {
 
   next();
 };
+
+exports.checkNewURL = (req, res, next) => {
+  const { longURL } = req.body;
+
+  axios
+    .get(longURL)
+    .then(response => {
+      next();
+    })
+    .catch(err => {
+      console.log(chalk.red(err))
+      req.session.title = "That page does not exist check url"
+      return res.redirect('/urls/new')
+    })
+}
 
 // ~~ Create new URL
 exports.createURL = (req, res, next) => {

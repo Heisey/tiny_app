@@ -23,7 +23,7 @@ router
 router
   .route('/new')
   .get(securityController.isLoggedIn, viewController.getURLForm) // ^^ URL submission form
-  .post(urlController.createURL) // ^^ submit URL data
+  .post(urlController.checkNewURL, urlController.createURL) // ^^ submit URL data
 
 router
   .route('/:shortURL')
