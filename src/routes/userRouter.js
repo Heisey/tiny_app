@@ -16,13 +16,13 @@ module.exports = router;
 
 router
   .route('/login')
-  .post(userController.findUser, userController.login)
+  .post(userController.findUser, userController.login);
 
 router
   .route('/logout')
-  .post(userController.logout)
+  .post(userController.logout);
 
 router
   .route('/signup')
   .get(viewController.getUserForm)
-  .post(userController.signup)
+  .post(userController.signup);

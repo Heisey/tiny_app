@@ -18,16 +18,16 @@ module.exports = router;
 
 router
   .route('/')
-  .get(urlController.getAll, urlController.getUserURLS, viewController.showAll) // ^^ Main Route
+  .get(urlController.getAll, urlController.getUserURLS, viewController.showAll); // ^^ Main Route
 
 router
   .route('/new')
   .get(securityController.isLoggedIn, viewController.getURLForm) // ^^ URL submission form
-  .post(urlController.checkNewURL, urlController.createURL) // ^^ submit URL data
+  .post(urlController.checkNewURL, urlController.createURL); // ^^ submit URL data
 
 router
   .route('/:shortURL')
   .get(urlController.getURL, viewController.getOne) // ^^ Returns info about url
   .put(urlController.updateURL) // ^^ Update a data entry
-  .delete(urlController.deleteURL) // ^^ Delete a data entry
+  .delete(urlController.deleteURL); // ^^ Delete a data entry
   

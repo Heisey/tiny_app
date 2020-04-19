@@ -4,7 +4,7 @@
 
 // ???????????????????????? File Modules ??????????????????????????
 // ?? Data
-const USERDB = require('../data/userData')
+const USERDB = require('../data/userData');
 
 // ## Start DB
 const userData = new USERDB();
@@ -17,7 +17,7 @@ exports.findUser = (req, res, next) => {
 
   // ## Query DB by username
   let user;
-  if(userData.findUser(username)) {
+  if (userData.findUser(username)) {
     user = userData.findUser(username).user;
   }
 
@@ -74,7 +74,7 @@ exports.signup = (req, res, next) => {
     // !! Check if email exists
   } else if (userData.findEmail(email)) {
 
-    // ~~ Set template title 
+    // ~~ Set template title
     req.templateVars.title = "Sorry that email is taken";
 
     // ^^ Redirect to user signup

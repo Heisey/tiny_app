@@ -10,7 +10,7 @@ exports.showAll = (req, res, next) => {
 
   // ^^ 200 Render index
   res.status(200).render('index', templateVars);
-}
+};
 
 // ~~ Render Create URL Form
 exports.getURLForm = (req, res, next) => {
@@ -18,11 +18,11 @@ exports.getURLForm = (req, res, next) => {
   // ~~ Get Template Variable from req
   const templateVars = req.templateVars;
 
-  console.log('viewController', templateVars)
+  console.log('viewController', templateVars);
 
   // ^^ 200 Render newURL
   res.status(200).render('newURL', templateVars);
-}
+};
 
 // ~~ Render One URL
 exports.getOne = (req, res, next) => {
@@ -32,7 +32,7 @@ exports.getOne = (req, res, next) => {
 
   // ^^ 200 Render singleURL
   res.status(200).render('singleURL', templateVars);
-}
+};
 
 // ~~ Render Create User Form
 exports.getUserForm = (req, res, next) => {
@@ -53,17 +53,17 @@ exports.getUserForm = (req, res, next) => {
 
   // ^^ 200 Render signUpUser
   res.status(200).render('signUpUser', templateVars);
-}
+};
 
 // ~~ Render Welcome Page
 exports.getWelcome = (req, res, next) => {
   const templateVars = req.templateVars;
 
-  res.render('welcome', templateVars)
-}
+  res.render('welcome', templateVars);
+};
 
 exports.getSorry = (req, res, next) => {
-  const templateVars = req.templateVars
+  const templateVars = req.templateVars;
 
-  res.render('sorry', templateVars)
-}
+  res.render('sorry', templateVars);
+};

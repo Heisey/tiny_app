@@ -10,6 +10,7 @@ const URLDB = require('../data/urlData');
 const checkHttp = require('../utils/checkHttp');
 const generateRandomString = require('../utils/generateRandomString');
 
+// ??????????????????????? Vendor Modules ?????????????????????????
 const axios = require('axios');
 const chalk = require('chalk');
 
@@ -55,20 +56,31 @@ exports.getURL = (req, res, next) => {
   next();
 };
 
+// ~~ Check url is valid
 exports.checkNewURL = (req, res, next) => {
+
+  // ~~ Get sent data
   const { longURL } = req.body;
 
+  // ^^ Make request to submitted url
   axios
     .get(longURL)
     .then(response => {
+
+      // ~~ if URL is good move to next function
       next();
     })
     .catch(err => {
-      console.log(chalk.red(err))
-      req.session.title = "That page does not exist check url"
-      return res.redirect('/urls/new')
-    })
-}
+      // !! Log error to console
+      console.log(chalk.red(err));
+
+      // ~~ Set title cookie
+      req.session.title = "That page does not exist check url";
+      
+      // ^^ Redirect to new url form
+      return res.redirect('/urls/new');
+    });
+};
 
 // ~~ Create new URL
 exports.createURL = (req, res, next) => {
@@ -79,7 +91,7 @@ exports.createURL = (req, res, next) => {
   if (!checkHttp(longURL)) {
     req.session.title = `${longURL} is a Invalid address`;
     
-    return res.redirect('/urls/new')
+    return res.redirect('/urls/new');
   }
 
   // ~~ Get User data
@@ -98,25 +110,25 @@ exports.createURL = (req, res, next) => {
 // ~~ Update URL
 exports.updateURL = (req, res, next) => {
 
-// ~~ Get params
-const { shortURL } = req.params;
+  // ~~ Get params
+  const { shortURL } = req.params;
 
-// ## update database
-URLDATA.updateURL(shortURL, req.body[shortURL]);
+  // ## update database
+  URLDATA.updateURL(shortURL, req.body[shortURL]);
 
-// ^^ 204 response to main URLS page
-res.status(204).redirect('/urls');
+  // ^^ 204 response to main URLS page
+  res.status(204).redirect('/urls');
 };
 
 // ~~ Delete URL
 exports.deleteURL = (req, res, next) => {
 
-// ~~ Grab key from params
-const { shortURL } = req.params;
+  // ~~ Grab key from params
+  const { shortURL } = req.params;
 
-// ## Delete Entry in DB using key
-URLDATA.deleteURL(shortURL);
+  // ## Delete Entry in DB using key
+  URLDATA.deleteURL(shortURL);
 
-// ^^ 204 response to main info page
-res.status(204).redirect('/urls');
+  // ^^ 204 response to main info page
+  res.status(204).redirect('/urls');
 };

@@ -7,9 +7,9 @@ exports.isLoggedIn = (req, res, next) => {
 
   // !! If no user set title and redirect to sign up
   if (req.templateVars.user === null) {
-    req.session.title = "You must make a account first"
-    return res.redirect('/user/signup')
+    req.session.title = "You must make a account first";
+    return res.redirect('/user/signup');
   }
 
-  next()
-}
+  next();
+};

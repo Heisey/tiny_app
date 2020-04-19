@@ -2,7 +2,7 @@ const generateRandomString = require('../utils/generateRandomString');
 const bcrypt = require('bcrypt');
 class USERDB {
   constructor() {
-    this._users = {}
+    this._users = {};
   }
 
   /**
@@ -81,7 +81,7 @@ class USERDB {
    */
   checkPassword(id, password) {
     
-    if(bcrypt.compareSync(password, this._users[id].password)) {
+    if (bcrypt.compareSync(password, this._users[id].password)) {
       return true;
     }
 
