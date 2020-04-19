@@ -18,6 +18,8 @@ exports.getURLForm = (req, res, next) => {
   // ~~ Get Template Variable from req
   const templateVars = req.templateVars;
 
+  console.log('viewController', templateVars)
+
   // ^^ 200 Render newURL
   res.status(200).render('newURL', templateVars);
 }
@@ -42,8 +44,6 @@ exports.getUserForm = (req, res, next) => {
   if (templateVars.title = undefined) {
     templateVars.title = null;
   }
-
-  console.log(templateVars)
 
   // ~~ set title from cookies
   templateVars.title = req.session.title;

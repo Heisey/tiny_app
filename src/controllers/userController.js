@@ -18,7 +18,7 @@ exports.findUser = (req, res, next) => {
   // ## Query DB by username
   let user;
   if(userData.findUser(username)) {
-    user = userData.findUser(username);
+    user = userData.findUser(username).user;
   }
 
   // ** Check Password

@@ -5,6 +5,9 @@
       style="margin: 1em;"
   >
     <h3>Create TinyURL</h3>
+    <% if (title) { %>
+      <h5><%= title %></h5>
+    <% } %>
     <form class="form-inline" 
           action="/urls/new"
           method="POST"

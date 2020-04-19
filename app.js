@@ -88,11 +88,16 @@ app.use((req, res, next) => {
   if (req.session.user !== undefined) {
     // ~~ Set template variables
     req.templateVars.user = req.session.user;
-    req.templateVars.tile = req.session.title;
   } else {
     
     // ~~ Set template variables to null
     req.templateVars.user = null;
+  }
+
+  if (req.session.title !== undefined) {
+    req.templateVars.title = req.session.title;
+  } else {
+    req.templateVars.title = null;
   }
 
   // ~~ Log Data to console

@@ -7,6 +7,7 @@
 const URLDB = require('../data/urlData');
 
 // ?? Utilities
+const checkHttp = require('../utils/checkHttp');
 const generateRandomString = require('../utils/generateRandomString');
 
 // ## Start DB
@@ -56,6 +57,12 @@ exports.createURL = (req, res, next) => {
 
   // ~~ Grab sent data
   const { longURL } = req.body;
+
+  if (!checkHttp(longURL)) {
+    req.session.title = `${longURL} is a Invalid address`;
+    
+    return res.redirect('/urls/new')
+  }
 
   // ~~ Get User data
   const { username } = req.templateVars.user;
