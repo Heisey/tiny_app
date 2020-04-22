@@ -26,6 +26,10 @@ router
   .post(urlController.checkNewURL, urlController.createURL); // ^^ submit URL data
 
 router
+  .route('/u/:shortURL')
+  .get(urlController.refWeb)
+
+router
   .route('/:shortURL')
   .get(urlController.getURL, viewController.getOne) // ^^ Returns info about url
   .put(urlController.updateURL) // ^^ Update a data entry

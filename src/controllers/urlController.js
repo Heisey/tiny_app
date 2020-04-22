@@ -132,3 +132,16 @@ exports.deleteURL = (req, res, next) => {
   // ^^ 204 response to main info page
   res.status(204).redirect('/urls');
 };
+
+// ~~ Redirect to Reference URL
+exports.refWeb = (req, res, next) => {
+
+  // ~~ Grab key from params
+  const { shortURL } = req.params;
+  
+  // ## Query DB for URL
+  const longURL = URLDATA.getURL(shortURL).longURL;
+  
+  // ^^ Redirect to URL
+  res.redirect(longURL)
+}
